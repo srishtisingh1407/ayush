@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import logo from "../../assets/1.jpg";
 import Image from "next/image";
 import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
-import { useRouter } from 'next/navigation';  // Use next/navigation
+import { useRouter } from 'next/navigation';
 
 const menuItems = [
   { name: "Schemes", href: "#" },
@@ -13,9 +13,9 @@ const menuItems = [
 ];
 const menuItems2 = [
   { name: "Home", href: "/home" },
-  { name: "About", href: "#" },
+  { name: "About", href: "/about" },
   { name: "Services", href: "#" },
-];
+]
 const menuItems3 = [
   { name: "Contact Us", href: "#" },
 ];
@@ -23,20 +23,19 @@ const menuItems3 = [
 function Header() {
   const { isSignedIn } = useUser();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const router = useRouter();  // Initialize useRouter
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleSignIn = () => {
-    // Trigger the login process here
-    router.push('/dashboard');  // Redirect after successful login
+    router.push('/dashboard');
   };
 
   return (
-    <div>
-      <div className="relative w-full bg-white">
+    <div className="sticky top-0 z-50 bg-white shadow">
+      <div className="relative w-full">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <Image src={logo} width={200} height={200} />
@@ -54,21 +53,7 @@ function Header() {
                 </li>
               ))}
             </ul>
-            <ul className="ml-12 inline-flex space-x-8">
-              {menuItems.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-                  >
-                    {item.name}
-                    <span>
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+          
             <ul className="ml-12 inline-flex space-x-8">
               {menuItems3.map((item) => (
                 <li key={item.name}>
@@ -82,12 +67,12 @@ function Header() {
               ))}
             </ul>
           </div>
-          <div className="hidden space-x-2 lg:block">
+          <div className="hidden space-x-2 lg:flex items-center">
             {isSignedIn ? (
               <>
                 <a
                   href="/dashboard"
-                  className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold  text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  className="rounded-md bg-transparent px-5 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   Dashboard
                 </a>
@@ -97,7 +82,7 @@ function Header() {
               <SignInButton mode="modal" onSignIn={handleSignIn}>
                 <button
                   type="button"
-                  className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold border-black-2 border-2 border-black  text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold border-black-2 border-2 border-black text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   Log In
                 </button>
@@ -139,20 +124,7 @@ function Header() {
                           </span>
                         </a>
                       ))}
-                      {menuItems.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
-                        >
-                          <span className="ml-3 text-base font-medium text-gray-900">
-                            {item.name}
-                          </span>
-                          <span>
-                            <ChevronRight className="ml-3 h-4 w-4" />
-                          </span>
-                        </a>
-                      ))}
+                     
                       {menuItems3.map((item) => (
                         <a
                           key={item.name}
